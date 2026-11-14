@@ -1,0 +1,27 @@
+# Normalize text files in Git; preserve binary files
+* text=auto
+
+# Use LF for source code and configuration
+*.js text eol=lf
+*.jsx text eol=lf
+*.ts text eol=lf
+*.tsx text eol=lf
+*.json text eol=lf
+*.mjs text eol=lf
+*.css text eol=lf
+*.scss text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.html text eol=lf
+*.svg text eol=lf
+*.gitignore text eol=lf
+*.gitattributes text eol=lf
+
+# Explicitly treat image assets as binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary
+*.webp binary
+*.gif binary
