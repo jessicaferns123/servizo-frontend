@@ -138,11 +138,21 @@
   color:#F15A29;
   position: relative;
 }
-.job-word-shape{
+.job-word::after{
+  content: "";
   position: absolute;
   left: 0;
-  bottom: 0;
-  width: 100%;
+  right: 0;
+  bottom: -2px;
+  height: 8px;
+  border-radius: 999px;
+  background-color: #FFBD3C;
+  opacity: 0.7;
+  z-index: -1;
+}
+.job-word{
+  display: inline-block;
+  z-index: 0;
 }
 .customer-count{
   color:#F15A29;

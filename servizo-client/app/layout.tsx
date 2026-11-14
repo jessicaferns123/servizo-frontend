@@ -21,7 +21,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Servizo",
   description: "Created by Jessica Fernandes",
-  icons: "/servizo_logo.png"
+  // Favicon is served automatically from app/favicon.ico.
 };
 
 export default function RootLayout({

@@ -10,6 +10,17 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog";
 import { useRouter } from 'next/navigation';
+import {
+    CalendarClock,
+    Droplets,
+    LayoutGrid,
+    ListChecks,
+    Scissors,
+    Search,
+    Sparkles,
+    Wrench,
+    Zap,
+} from 'lucide-react';
 //import { useNavigation } from '../context/navigation-context';
 
 type Category = {
@@ -18,6 +29,65 @@ type Category = {
     icon: string;
     categorydescription: string;
 };
+
+const techStack = ['Next.js 15', 'React 19', 'TypeScript', 'Tailwind CSS v4'];
+
+const steps = [
+    {
+        number: '01',
+        Icon: Search,
+        title: 'Browse Categories',
+        text: 'Explore service categories to find the kind of help you need.',
+    },
+    {
+        number: '02',
+        Icon: ListChecks,
+        title: 'Explore Services',
+        text: 'Open a category to see the services it includes. This flow is still in progress.',
+    },
+    {
+        number: '03',
+        Icon: CalendarClock,
+        title: 'Request a Service',
+        text: 'Booking and scheduling are planned for a future release. This step shows where they will fit.',
+    },
+];
+
+function TitleAccent() {
+    return (
+        <div aria-hidden="true" className='flex items-center gap-[6px] mb-[20px]'>
+            <span className='block h-[6px] w-[22px] rounded-full bg-[#F15A29]' />
+            <span className='block h-[6px] w-[10px] rounded-full bg-[#FFBD3C]' />
+        </div>
+    );
+}
+
+function HeroIllustration() {
+    const badges = [
+        { Icon: Sparkles, className: 'top-[6%] left-[8%] bg-white text-[#F15A29]' },
+        { Icon: Zap, className: 'top-[12%] right-[6%] bg-[#FFBD3C] text-[#032642]' },
+        { Icon: Scissors, className: 'bottom-[14%] left-[2%] bg-[#FFBD3C] text-[#032642]' },
+        { Icon: Droplets, className: 'bottom-[6%] right-[12%] bg-white text-[#33659a]' },
+    ];
+
+    return (
+        <div aria-hidden="true" className='relative mx-auto aspect-square w-full max-w-[460px]'>
+            <div className='absolute inset-[10%] rounded-full bg-[#F15A29] opacity-15' />
+            <div className='absolute inset-[18%] rounded-full border-2 border-dashed border-[#F15A29] opacity-40' />
+            <div className='absolute inset-[26%] flex items-center justify-center rounded-full bg-[#032642] shadow-xl'>
+                <Wrench className='h-1/2 w-1/2 text-white' strokeWidth={1.5} />
+            </div>
+            {badges.map(({ Icon, className }, idx) => (
+                <div
+                    key={idx}
+                    className={`absolute flex h-[18%] w-[18%] items-center justify-center rounded-2xl shadow-lg ${className}`}
+                >
+                    <Icon className='h-1/2 w-1/2' strokeWidth={1.75} />
+                </div>
+            ))}
+        </div>
+    );
+}
 
 export default function HomePage() {
     const [categories, setCategories] = useState<Category[]>([]);
@@ -73,68 +143,77 @@ export default function HomePage() {
         }
     };
 
+    const hasCategories = Array.isArray(categories) && categories.length > 0;
+
     return (
         <>
             <div className="pl-[24px] pt-[48px] pr-[24px] pb-[48px] hero-container">
-                <div className="mx-auto max-w-7xl px-8 md:px-8">
-                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                <div className="mx-auto max-w-7xl px-2 md:px-8">
+                    <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-2">
                         <div className='p-4'>
                             <div>
-                                <p className='text-[52px] font-[700] leading-[61px] text-left mb-5'>Choose Experts to<br /> Get Your &nbsp; 
-                                    <span className='job-word'>
-                                        Job
-                                        <img className='job-word-shape' src='/banner-title-shape.png'/>
-                                    </span><br />
+                                <span className='mb-5 inline-block rounded-full border border-[#F15A29]/30 bg-white px-3 py-1 text-[13px] font-[600] text-[#F15A29]'>
+                                    Frontend portfolio project · work in progress
+                                </span>
+                                <p className='text-[40px] leading-[48px] md:text-[52px] font-[700] md:leading-[61px] text-left mb-5'>Choose Experts to<br /> Get Your &nbsp;
+                                    <span className='job-word'>Job</span><br />
                                       Done
                                 </p>
                                 <p className='text-[18px] font-[400] leading-[30px] text-left'>
-                                    Explore our marketplace to find top-rated professionals in your area. Compare reviews, check availability, and book services with confidence—all in one place.
+                                    Servizo is a marketplace concept for finding local home-service professionals. Browse services by category and explore how the customer and provider experience is designed.
                                 </p>
                             </div>
-                            <div className='flex items-center gap-[5px] my-10'>
-                                <div>
-                                    <ul className='flex items-center'>
-                                        <li>
-                                            <img src='/customer-1.png' className='w-full h-full'/>
+                            <div className='my-10 text-left'>
+                                <p className='text-[14px] font-[600] uppercase tracking-[1.2px] text-[#032642]/70 mb-3'>Built with</p>
+                                <ul className='flex flex-wrap gap-2'>
+                                    {techStack.map((tech) => (
+                                        <li key={tech} className='rounded-full bg-white px-4 py-2 text-[15px] font-[600] text-[#032642] shadow-sm'>
+                                            {tech}
                                         </li>
-                                        <li className='ml-[-13px]'>
-                                            <img src='/customer-2.png' className='w-full h-full'/>
-                                        </li>
-                                        <li className='ml-[-13px]'>
-                                            <img src='/customer-3.png' className='w-full h-full'/>
-                                        </li>
-                                        <li className='ml-[-13px]'>
-                                            <img src='/customer-4.png' className='w-full h-full'/>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div className='text-left'>
-                                    <p className='text-[22px] font-[700] leading-[30px]'>
-                                        <span className='customer-count'>2k+</span> Customers
-                                    </p>
-                                    <p className='text-[18px] leading-[30px]'>Satisfied with Servizo services</p>
-                                </div>
+                                    ))}
+                                </ul>
                             </div>
                         </div>
-                        <div>
-                            <img src='/hero-img.png'/>
+                        <div className='p-4'>
+                            <HeroIllustration />
                         </div>
                     </div>
                 </div>
             </div>
 
-            
+
             <div className='pt-25 pb-20'>
                 <div className="mx-auto max-w-7xl px-8 md:px-8">
                     <div className='flex items-end justify-between mb-15'>
                         <div>
-                            <img src='/title-shape-1.png' className='w-[34px] h-[25px] mb-[20px]'/>
+                            <TitleAccent />
                             <p className='relative text-[#FFBD3C] uppercase text-[16px] font-[700] leading-[24px] mb-[7px] tracking-[1.44px] text-left'>Categories</p>
-                            <p className='text-[48px] font-[700] leading-[56px] mb-[7px]'>Popular Categories</p>
+                            <p className='text-[36px] leading-[44px] md:text-[48px] font-[700] md:leading-[56px] mb-[7px]'>Popular Categories</p>
                         </div>
-                        <a></a>
                     </div>
-                    
+
+                    {loading && (
+                        <div className='grid grid-cols-2 gap-4 md:grid-cols-4' aria-busy="true" aria-label="Loading categories">
+                            {[0, 1, 2, 3].map((i) => (
+                                <div key={i} className='h-[230px] animate-pulse rounded-[24px] border border-[#F5E4DF] bg-[#fdf6f4]' />
+                            ))}
+                        </div>
+                    )}
+
+                    {!loading && !hasCategories && (
+                        <div className='flex flex-col items-center rounded-[24px] border-2 border-dashed border-[#F5E4DF] bg-[#fffaf9] px-6 py-14 text-center'>
+                            <div className='mb-5 flex h-[72px] w-[72px] items-center justify-center rounded-2xl bg-[#F15A29]/10 text-[#F15A29]'>
+                                <LayoutGrid className='h-9 w-9' strokeWidth={1.75} />
+                            </div>
+                            <p className='text-[22px] font-[700] leading-[30px] text-[#032642] mb-2'>No categories to show yet</p>
+                            <p className='max-w-[520px] text-[16px] leading-[26px] text-gray-600'>
+                                Service categories are loaded from the Servizo API, which is kept private for now.
+                                They will appear here once the API is connected.
+                            </p>
+                        </div>
+                    )}
+
+                    {!loading && hasCategories && (
                     <div className='grid grid-cols-2 gap-4 md:grid-cols-4'>
                     {
                         categories.map((cat, index) => (
@@ -145,7 +224,7 @@ export default function HomePage() {
                                         //fetchServicesByCategory(cat.categoryid); // Call your new API
                                     }} className='cursor-pointer relative w-full pt-[32px] pb-[24px] px-0 text-center rounded-[24px] border border-[#F5E4DF] mb-[30px] tile-body'>
                                         <div className='w-[140px] h-[140px] mx-auto'>
-                                            <img src={cat.icon} className='w-auto h-full'/>
+                                            <img src={cat.icon} alt={cat.name} className='w-auto h-full'/>
                                         </div>
                                         <div className='px-2'>
                                             <p className='text-[20px] font-[500] leading-[30px] mt-[16px] mb-[4px] tile-title'>{cat.name}</p>
@@ -159,7 +238,7 @@ export default function HomePage() {
                                             {selectedCategory?.categorydescription}
                                         </DialogDescription>
                                     </DialogHeader>
-                                    
+
                                     <div className="max-h-[300px] overflow-y-auto custom-scroll">
                                         <ul className="space-y-3">
                                             {services.map((service:any, idx:number) => (
@@ -174,59 +253,36 @@ export default function HomePage() {
                         ))
                     }
                     </div>
+                    )}
                 </div>
             </div>
 
-        
+
 
             <div className="bg-white py-8 overflow-hidden">
                 <div className="mx-auto max-w-7xl px-8 pt-[80px] pb-[80px] sm:px-6 md:px-8 relative rounded-[24px] z-1 service-section">
                     <div className='mb-10 text-center'>
                         <p className='text-[#FFBD3C] uppercase text-[16px] font-[700] leading-[24px] mb-[7px] tracking-[1.44px]'>How It Works</p>
-                        <p className='text-white font-[700] text-[30px] leading-[40px]'>Convinient Service Access</p>
-                        <p className='text-[#F4FAFF] text-[18px] leading-[32px] max-w-[600px] mx-auto'>Launch your online presence with ease! Access various services at your convinience with easy steps on our website.</p>
+                        <p className='text-white font-[700] text-[30px] leading-[40px]'>Convenient Service Access</p>
+                        <p className='text-[#F4FAFF] text-[18px] leading-[32px] max-w-[600px] mx-auto'>A simple three-step flow designed to connect customers with local service professionals.</p>
                     </div>
                     <div className='relative'>
-                        <div className='absolute top-[25%] left-[20%] w-full z-[-1]'>
-                            <img src='/arrow-line.png'/>
-                        </div>
-                        <div className='grid grid-cols-3 gap-4'>
-                            <div className='text-center service-col-container'>
-                                <div>
-                                    <p className='relative text-[50px] mb-[-18px] z-[-1] service-col-header'>01</p>
+                        <div aria-hidden="true" className='absolute top-[117px] left-[16%] right-[16%] z-[-1] hidden border-t-2 border-dashed border-[#5A6F80] md:block' />
+                        <div className='grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-4'>
+                            {steps.map(({ number, Icon, title, text }) => (
+                                <div key={number} className='text-center service-col-container'>
+                                    <div>
+                                        <p className='relative text-[50px] mb-[-18px] z-[-1] service-col-header'>{number}</p>
+                                    </div>
+                                    <div className='w-[130px] h-[130px] rounded-full border border-[#F15A29] mx-auto flex items-center justify-center service-icon'>
+                                        <Icon aria-hidden="true" className='h-[52px] w-[52px] text-white' strokeWidth={1.5} />
+                                    </div>
+                                    <div>
+                                        <p className='text-white text-[20px] font-[600] leading-[32px] mt-[23px] mb-[10px]'>{title}</p>
+                                        <p className='max-w-[337px] w-full text-[#F4FAFF] mx-auto text-[16px]'>{text}</p>
+                                    </div>
                                 </div>
-                                <div className='w-[130px] h-[130px] rounded-full border border-[#F15A29] mx-auto flex items-center justify-center service-icon'>
-                                    <img src='/service-01.png' className='inline-block max-w-full h-auto'/>
-                                </div>
-                                <div>
-                                    <p className='text-white text-[20px] font-[600] leading-[32px] mt-[23px] mb-[10px]'>Choose Your Service</p>
-                                    <p className='max-w-[337px] w-full text-[#F4FAFF] mx-auto text-[16px]'>Pick the service that your looking for on our website</p>
-                                </div>
-                            </div>
-                            <div className='text-center service-col-container'>
-                                <div>
-                                    <p className='relative text-[50px] mb-[-18px] z-[-1] service-col-header'>02</p>
-                                </div>
-                                <div className='w-[130px] h-[130px] rounded-full border border-[#F15A29] mx-auto flex items-center justify-center service-icon'>
-                                    <img src='/service-02.png' className='inline-block max-w-full h-auto'/>
-                                </div>
-                                <div>
-                                    <p className='text-white text-[20px] font-[600] leading-[32px] mt-[23px] mb-[10px]'>Pick Your Schedule</p>
-                                    <p className='max-w-[337px] w-full text-[#F4FAFF] mx-auto text-[16px]'>Pick the schedule that suits you well as per your convinience</p>
-                                </div>
-                            </div>
-                            <div className='text-center service-col-container'>
-                                <div>
-                                    <p className='relative text-[50px] mb-[-18px] z-[-1] service-col-header'>03</p>
-                                </div>
-                                <div className='w-[130px] h-[130px] rounded-full border border-[#F15A29] mx-auto flex items-center justify-center service-icon'>
-                                    <img src='/service-03.png' className='inline-block max-w-full h-auto'/>
-                                </div>
-                                <div>
-                                    <p className='text-white text-[20px] font-[600] leading-[32px] mt-[23px] mb-[10px]'>Place The Order</p>
-                                    <p className='max-w-[337px] w-full text-[#F4FAFF] mx-auto text-[16px]'>Place an order for the service you wish to book with us</p>
-                                </div>
-                            </div>
+                            ))}
                         </div>
                     </div>
                 </div>
